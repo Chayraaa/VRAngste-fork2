@@ -1,0 +1,38 @@
+name: Validate Scene File Naming
+
+on:
+  pull_request:
+    paths:
+      - 'Assets/Scenes/**/*.unity'
+
+jobs:
+  check-scene-names:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Collect changed
+        id: changed
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff --name-only origin/${{ github.base_ref }} HEAD > changed_files.txt
+
+      - name: Check
+        run: |
+          VIOLATION=0
+          AUTHOR=$(git log -1 --pretty=format:'%an' -- "$FILE")
+          echo "File: $FILE (last changed by: $AUTHOR)"
+          EXPECTED_USERNAME=$(echo "$AUTHOR" | tr '[:upper:]' '[:lower:]' | tr ' ' '_')
+          while IFS= read -r FILE; do
+            if [[ "$FILE" == Assets/Scenes/*.unity ]]; then
+              FILENAME=$(basename "$FILE")
+              if [[ ! "$FILENAME" =~ ^${EXPECTED_USERNAME}_.*\.unity$ ]]; then
+                echo "Invalid file: $FILE"
+                VIOLATION=1
+              fi
+            fi
+          done < changed_files.txt
+
+          if [[ "$VIOLATION" -eq 1 ]]; then
+            exit 1
+          fi
