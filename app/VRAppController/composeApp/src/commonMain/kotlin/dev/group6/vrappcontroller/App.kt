@@ -33,76 +33,47 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.group6.vrappcontroller.model.ControlModel
 import dev.group6.vrappcontroller.model.DataModel
+import dev.group6.vrappcontroller.model.ServerPopupModel
 import dev.group6.vrappcontroller.model.StreamModel
 import dev.group6.vrappcontroller.ui.theme.AppTheme
 import dev.group6.vrappcontroller.view.ControlView
 import dev.group6.vrappcontroller.view.DataView
+import dev.group6.vrappcontroller.view.NavigationView
+import dev.group6.vrappcontroller.view.ServerPopupView
 import dev.group6.vrappcontroller.view.StreamView
 
 @Composable
 fun App() {
+
     val controlModel = ControlModel()
     val dataModel = DataModel()
     val streamModel = StreamModel()
+    val serverPopupModel = ServerPopupModel()
 
-    var selected by remember { mutableIntStateOf(0) }
+    var isServerPopupVisible by remember { mutableStateOf(true) }
+
     AppTheme {
         Surface {
-
             Scaffold(
                 modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars)
             ) { contentPadding ->
-                Row {
-                    NavigationRail(
-                        modifier = Modifier.padding(contentPadding)
-                    ) {
-                        NavigationRailItem(
-                            selected = selected == 0,
-                            onClick = { selected = 0 },
-                            icon = { Icon(Icons.Default.Vrpano, null) },
-                            label = { Text("Steuerung") }
-                        )
-                        NavigationRailItem(
-                            selected = selected == 1,
-                            onClick = { selected = 1 },
-                            icon = { Icon(Icons.Default.Timeline, null) },
-                            label = { Text("Daten") }
-                        )
-                    }
-
-                    //Change screen based on selection
-                    when (selected) {
-                        0 -> Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.TopCenter
-                        ) {
-                            Row(modifier = Modifier.fillMaxSize()) {
-                                StreamView(streamModel)
-                                VerticalDivider(thickness = 2.dp)
-                                ControlView(controlModel)
+                Box(
+                    contentAlignment = Alignment.Center,
+                ) {
+                    if (isServerPopupVisible)
+                        ServerPopupView(
+                            serverPopupModel,
+                            onDismiss = {
+                                isServerPopupVisible = false
                             }
-                            Column {
-                                Spacer(Modifier.fillMaxHeight(0.85f))
-                                ElevatedButton(
-                                    colors = ButtonDefaults.elevatedButtonColors().copy(
-                                        containerColor = MaterialTheme.colorScheme.error,
-                                        contentColor = MaterialTheme.colorScheme.onError,
-                                    ),
-                                    onClick = {}
-                                ) {
-                                    Text(
-                                        modifier = Modifier.padding(16.dp, 8.dp),
-                                        text = "STOP",
-                                        style = if (getPlatform().name == "Desktop")
-                                            MaterialTheme.typography.bodyLarge.copy(fontSize = 24.sp)
-                                        else MaterialTheme.typography.bodyLarge
-                                    )
-                                }
-                            }
-                        }
-
-                        1 -> DataView(dataModel)
-                    }
+                        )
+                    NavigationView(
+                        contentPadding,
+                        controlModel,
+                        dataModel,
+                        streamModel,
+                        reopenServerPopup = { isServerPopupVisible = true }
+                    )
                 }
             }
         }
