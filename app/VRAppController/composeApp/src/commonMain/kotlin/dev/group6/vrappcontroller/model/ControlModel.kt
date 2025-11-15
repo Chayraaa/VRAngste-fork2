@@ -100,5 +100,4 @@ class ControlModel() : ViewModel() {
             server.broadcast(envelope)
         }
     }
-
 }

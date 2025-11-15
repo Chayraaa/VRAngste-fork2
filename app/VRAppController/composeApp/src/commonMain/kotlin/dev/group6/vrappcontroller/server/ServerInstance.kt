@@ -6,8 +6,7 @@ object ServerInstance {
     val nonce: String
 
     init {
-        //val randomNonce = generateNonce()
-        val randomNonce = "xwlS"
+        val randomNonce = generateNonce()
         nonce = randomNonce
         server = Server(port = 35614, nonce = randomNonce)
         println("Server created on port 35614 with nonce: $randomNonce")
