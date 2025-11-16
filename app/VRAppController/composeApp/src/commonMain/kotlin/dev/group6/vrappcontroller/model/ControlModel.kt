@@ -2,20 +2,9 @@ package dev.group6.vrappcontroller.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.group6.vrappcontroller.server.CloudDensitySetting
-import dev.group6.vrappcontroller.server.Envelope
-import dev.group6.vrappcontroller.server.LightningBrightnessSetting
-import dev.group6.vrappcontroller.server.LightningDistanceSetting
-import dev.group6.vrappcontroller.server.LightningFrequencySetting
-import dev.group6.vrappcontroller.server.LightningReport
-import dev.group6.vrappcontroller.server.RainSetting
-import dev.group6.vrappcontroller.server.ServerInstance
-import dev.group6.vrappcontroller.server.ThunderSetting
-import dev.group6.vrappcontroller.server.WindSetting
-import kotlinx.coroutines.currentCoroutineContext
+import dev.group6.vrappcontroller.server.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlin.coroutines.coroutineContext
 
 /**
  * Model for handling the slider values.

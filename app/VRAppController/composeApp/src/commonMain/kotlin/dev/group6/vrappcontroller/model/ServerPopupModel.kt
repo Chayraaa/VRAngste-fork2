@@ -2,7 +2,6 @@ package dev.group6.vrappcontroller.model
 
 import androidx.lifecycle.ViewModel
 import dev.group6.vrappcontroller.getLocalIP
-import dev.group6.vrappcontroller.server.Server
 import dev.group6.vrappcontroller.server.ServerInstance
 import kotlinx.coroutines.flow.MutableStateFlow
 
