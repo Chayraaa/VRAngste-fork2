@@ -52,50 +52,68 @@ class ControlModel() : ViewModel() {
 
     fun setThunderVolume(value: Float) {
         _thunderVolume.value = value
-        sendEnvelope()
+        sendEnvelope(
+            Envelope(
+                thunder_setting = ThunderSetting(_thunderVolume.value.toUInt())
+            )
+        )
     }
 
     fun setLightningBrightness(value: Float) {
         _lightningBrightness.value = value
-        sendEnvelope()
+        sendEnvelope(
+            Envelope(
+                lightning_brightness_setting = LightningBrightnessSetting(_lightningBrightness.value)
+            )
+        )
     }
 
     fun setLightningDistance(value: Float) {
         _lightningDistance.value = value
-        sendEnvelope()
+        sendEnvelope(
+            Envelope(
+                lightning_distance_setting = LightningDistanceSetting(_lightningDistance.value)
+            )
+        )
     }
 
     fun setRain(value: Int) {
         _rain.value = value
-        sendEnvelope()
+        sendEnvelope(
+            Envelope(
+                rain_setting = RainSetting(_rain.value.toUInt())
+            )
+        )
     }
 
     fun setWind(value: Int) {
         _wind.value = value
-        sendEnvelope()
+        sendEnvelope(
+            Envelope(
+                wind_setting = WindSetting(_wind.value.toUInt())
+            )
+        )
     }
 
     fun setClouds(value: Int) {
         _clouds.value = value
-        sendEnvelope()
+        sendEnvelope(
+            Envelope(
+                cloud_density_setting = CloudDensitySetting(_clouds.value.toUInt())
+            )
+        )
     }
 
     fun setLightningInterval(value: Int) {
         _lightningInterval.value = value
-        sendEnvelope()
+        sendEnvelope(
+            Envelope(
+                lightning_frequency_setting = LightningFrequencySetting(_lightningInterval.value.toFloat())
+            )
+        )
     }
 
-    fun sendEnvelope() {
-        val envelope = Envelope(
-            rain_setting = RainSetting(_rain.value.toUInt()),
-            wind_setting = WindSetting(_wind.value.toUInt()),
-            thunder_setting = ThunderSetting(_thunderVolume.value.toUInt()),
-            lightning_frequency_setting = LightningFrequencySetting(_lightningInterval.value.toFloat()),
-            lightning_brightness_setting = LightningBrightnessSetting(_lightningBrightness.value),
-            lightning_distance_setting = LightningDistanceSetting(_lightningDistance.value),
-            cloud_density_setting = CloudDensitySetting(_clouds.value.toUInt())
-        )
-
+    fun sendEnvelope(envelope: Envelope) {
         viewModelScope.launch {
             server.broadcast(envelope)
         }
