@@ -1,5 +1,9 @@
 package dev.group6.vrappcontroller.server
 
+import dev.group6.vrappcontroller.stream.module
+import io.ktor.server.application.Application
+import io.ktor.server.engine.embeddedServer
+
 object ServerInstance {
     private val server: Server
     private var isRunning = false
@@ -20,6 +24,12 @@ object ServerInstance {
     fun start() {
         if (isRunning) return
         server.start()
+
+        embeddedServer(
+            Netty,
+            port = 8086,
+            module = Application::module
+        ).start(wait = false)
         isRunning = true
     }
 
