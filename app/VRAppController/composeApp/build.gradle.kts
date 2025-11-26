@@ -52,7 +52,7 @@ kotlin {
             implementation(libs.atomicfu)
             implementation(libs.ktor.server.core)
             implementation(libs.ktor.server.websockets)
-            implementation(libs.ktor.server.netty)
+            implementation(libs.ktor.server.cio)
             implementation(libs.ktor.server.content.negotiation)
 
             implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
