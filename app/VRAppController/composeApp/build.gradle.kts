@@ -107,6 +107,10 @@ compose.desktop {
             packageName = "dev.group6.vrappcontroller"
             packageVersion = "1.0.0"
         }
+
+        buildTypes.release.proguard {
+            isEnabled = false
+        }
     }
 }
 
