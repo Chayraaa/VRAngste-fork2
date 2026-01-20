@@ -60,8 +60,7 @@ class ControlModel() : ViewModel() {
         _lightningDistance.value = 1.0f
     }
 
-    fun setThunderVolume(value: Float) {
-        _thunderVolume.value = value
+    fun setThunderVolume() {
         sendEnvelope(
             Envelope(
                 thunder_setting = ThunderSetting(_thunderVolume.value)
@@ -69,8 +68,11 @@ class ControlModel() : ViewModel() {
         )
     }
 
-    fun setLightningBrightness(value: Float) {
-        _lightningBrightness.value = value
+    fun setThunderVolumeWithoutEnv(value: Float) {
+        _thunderVolume.value = value
+    }
+
+    fun setLightningBrightness() {
         sendEnvelope(
             Envelope(
                 lightning_brightness_setting = LightningBrightnessSetting(_lightningBrightness.value)
@@ -78,13 +80,20 @@ class ControlModel() : ViewModel() {
         )
     }
 
-    fun setLightningDistance(value: Float) {
-        _lightningDistance.value = value
+    fun setLightningBrightnessWithoutEnv(value: Float) {
+        _lightningBrightness.value = value
+    }
+
+    fun setLightningDistance() {
         sendEnvelope(
             Envelope(
                 lightning_distance_setting = LightningDistanceSetting(_lightningDistance.value)
             )
         )
+    }
+
+    fun setLightningDistanceWithoutEnv(value: Float) {
+        _lightningDistance.value = value
     }
 
     fun resetToDefault() {
@@ -129,13 +138,16 @@ class ControlModel() : ViewModel() {
         )
     }
 
-    fun setLightningInterval(value: Int) {
-        _lightningInterval.value = value
+    fun setLightningInterval() {
         sendEnvelope(
             Envelope(
                 lightning_frequency_setting = LightningFrequencySetting(_lightningInterval.value.toFloat())
             )
         )
+    }
+
+    fun setLightningIntervalWithoutEnv(value: Int) {
+        _lightningInterval.value = value
     }
 
     fun setSelectedScene(value: Int) {
