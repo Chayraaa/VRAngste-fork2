@@ -88,14 +88,14 @@ class ControlModel() : ViewModel() {
     }
 
     fun resetToDefault() {
-        setThunderVolume(1.0f)
-        setLightningBrightness(1.0f)
-        setLightningDistance(1.0f)
-        setStormSize(1.0f)
-        setRain(0)
-        setWind(0)
-        setClouds(0)
-        setLightningInterval(100)
+        _thunderVolume.value = 1.0f
+        _lightningBrightness.value = 1.0f
+        _lightningDistance.value = 1.0f
+        _stormSize.value = 1.0f
+        _rain.value = 0
+        _wind.value = 0
+        _clouds.value = 0
+        _lightningInterval.value = 100
     }
 
     fun setStormSize(value: Float) {
