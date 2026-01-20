@@ -54,7 +54,6 @@ fun ControlView(
     val remainingThunderMs by viewModel.remainingThunderMs.collectAsState()
     val nextThunderTimestamp by viewModel.nextThunderTimestamp.collectAsState()
     val maxThunderCountdown by viewModel.maxThunderCountdown.collectAsState()
-    viewModel.setNextTimerTimestamp(Clock.System.now().toEpochMilliseconds() + 30000L)
 
     Row {
         Column(

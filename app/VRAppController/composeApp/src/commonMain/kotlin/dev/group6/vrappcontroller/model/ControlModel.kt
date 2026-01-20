@@ -37,7 +37,7 @@ class ControlModel() : ViewModel() {
     var _clouds = MutableStateFlow(0)
     val clouds: MutableStateFlow<Int> = _clouds
 
-    var _lightningInterval = MutableStateFlow(10)
+    var _lightningInterval = MutableStateFlow(100)
     val lightningInterval: MutableStateFlow<Int> = _lightningInterval
 
     var _selectedScene = MutableStateFlow(0)
@@ -95,7 +95,7 @@ class ControlModel() : ViewModel() {
         setRain(0)
         setWind(0)
         setClouds(0)
-        setLightningInterval(10)
+        setLightningInterval(100)
     }
 
     fun setStormSize(value: Float) {
